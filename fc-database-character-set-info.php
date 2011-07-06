@@ -2,7 +2,7 @@
 /*
 Plugin Name: FC Database character set info
 Plugin URI: http://www.fanaticalcode.com/
-Description: Database helper plugin for Wordpress administrators. Check your database, table and column character set. Avaliable by "Tools" > "DB Character Set Info" in admin panel.
+Description: Simple database helper plugin for Wordpress administrators. Check your database, tables and columns character set. Avaliable by "Tools" > "DB Character Set Info" in Wordpress admin panel.
 Version: 0.1.0
 Author: Fanatical Code - Kamil Skrzypiński
 Author URI: http://www.fanaticalcode.com
@@ -38,20 +38,20 @@ function fcdbcsi_settings_page()
 		
 		// SQL based on http://stackoverflow.com/questions/1049728/how-do-i-see-what-character-set-a-database-table-column-is-in-mysql/4805964#4805964 by Eric
 		$temp = $wpdb->query("SELECT TABLE_SCHEMA,
-		       TABLE_NAME,
-		       CCSA.CHARACTER_SET_NAME AS DEFAULT_CHAR_SET,
-		       COLUMN_NAME,
-		       COLUMN_TYPE,
-		       C.CHARACTER_SET_NAME
-		  FROM information_schema.TABLES AS T
-		  JOIN information_schema.COLUMNS AS C USING (TABLE_SCHEMA, TABLE_NAME)
-		  JOIN information_schema.COLLATION_CHARACTER_SET_APPLICABILITY AS CCSA
-		       ON (T.TABLE_COLLATION = CCSA.COLLATION_NAME)
-		 WHERE TABLE_SCHEMA=SCHEMA()
-		   AND C.DATA_TYPE IN ('enum', 'varchar', 'char', 'text', 'mediumtext', 'longtext')
-		 ORDER BY TABLE_SCHEMA,
-		          TABLE_NAME,
-		          COLUMN_NAME");
+			TABLE_NAME,
+			CCSA.CHARACTER_SET_NAME AS DEFAULT_CHAR_SET,
+			COLUMN_NAME,
+			COLUMN_TYPE,
+			C.CHARACTER_SET_NAME
+			FROM information_schema.TABLES AS T
+			JOIN information_schema.COLUMNS AS C USING (TABLE_SCHEMA, TABLE_NAME)
+			JOIN information_schema.COLLATION_CHARACTER_SET_APPLICABILITY AS CCSA
+			ON (T.TABLE_COLLATION = CCSA.COLLATION_NAME)
+			WHERE TABLE_SCHEMA=SCHEMA()
+				AND C.DATA_TYPE IN ('enum', 'varchar', 'char', 'text', 'mediumtext', 'longtext')
+			ORDER BY TABLE_SCHEMA,
+				TABLE_NAME,
+				COLUMN_NAME");
 		
 		$result = $wpdb->last_result;
 		
