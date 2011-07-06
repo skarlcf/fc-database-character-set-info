@@ -1,0 +1,30 @@
+table.fcdbcsi {
+	display: table;
+	margin: 1.0em 0.5em;
+	border: 1px solid #ddd;
+	border-spacing: 0;
+}
+table.fcdbcsi thead th {
+	font-size: 1.1em;
+	text-align: center;
+	background: #ddd;
+}
+table.fcdbcsi th, table.fcdbcsi td {
+	padding: 3px 11px;
+}
+
+table.fcdbcsi tr:nth-child(odd) {
+	background-color: rgba(0,0,0,0.01);
+}
+table.fcdbcsi tr:nth-child(even) {
+	background-color: rgba(0,0,0,0.05);
+}
+table.fcdbcsi tr:hover td {
+	background-color: rgba(0,0,0,0.1);
+}
+table.fcdbcsi td.notify {
+	background-color: rgba(200,0,0,0.1);
+}
+table.fcdbcsi tr:hover td.notify {
+	background-color: rgba(200,0,0,0.2);
+}
